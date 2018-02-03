@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.hpugs.entity.po.UserAccount" table="user_account">
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="native" />
+		</id>
+		<property name="account" type="java.lang.String">
+			<column name="account" />
+		</property>
+		<property name="passwd" type="java.lang.String">
+			<column name="passwd" />
+		</property>
+		<property name="state" type="java.lang.Integer">
+			<column name="state" />
+		</property>
+		<property name="gmtCreate" type="java.util.Date">
+			<column name="gmt_create" />
+		</property>
+		<property name="gmtModified" type="java.util.Date">
+			<column name="gmt_modified" />
+		</property>
+		<property name="remark" type="java.lang.String">
+			<column name="remark" />
+		</property>
+	</class>
+</hibernate-mapping>

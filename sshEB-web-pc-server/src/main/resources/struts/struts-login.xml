@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	<package name="login" namespace="/login" extends="struts-default">
+		<!-- 未登录、操作错误 -->
+		<global-results>
+			<result name="notLogin" type="redirectAction">
+				<param name="namespace">/login</param>
+                <param name="actionName">loginJsp.action</param>
+			</result>
+			<result name="error">error.jsp</result>
+		</global-results>
+		<!-- 未登录、操作错误 -->
+	
+		<!-- 登录页面 -->
+		<action name="loginJsp" class="loginAction" method="loginJsp">
+			<result name="success">/WEB-INF/jsp/login.jsp</result>
+		</action>
+		<!-- 账号密码登录接口 -->
+		<action name="loginCheck" class="loginAction" method="loginCheck"></action>
+		<!-- 短信验证码登录接口 -->
+		<action name="smsCodeLoginCheck" class="loginAction" method="smsCodeLoginCheck"></action>
+	</package>
+
+</struts>

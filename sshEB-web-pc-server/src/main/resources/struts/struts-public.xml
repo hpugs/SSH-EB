@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	<package name="public" namespace="/public" extends="struts-default">
+		<!-- 未登录、操作错误 -->
+		<global-results>
+			<result name="notLogin" type="redirectAction">
+				<param name="namespace">/login</param>
+                <param name="actionName">loginJsp.action</param>
+			</result>
+			<result name="error">error.jsp</result>
+		</global-results>
+		<!-- 未登录、操作错误 -->
+	
+		<!-- 首页页面 -->
+		<action name="indexJsp" class="publicAction" method="indexJsp">
+			<result name="success">/WEB-INF/jsp/index.jsp</result>
+		</action>
+	</package>
+
+</struts>

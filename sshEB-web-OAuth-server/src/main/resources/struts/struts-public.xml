@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	<package name="public" namespace="/" extends="struts-default">
+		<!-- 首页 -->
+		<action name="indexJsp" class="publicAction" method="indexJsp">
+			<result name="success">WEB-INF/jsp/index.jsp</result>
+		</action>
+		<!-- 微信授权 -->
+		<action name="oauthWXJsp" class="publicAction" method="oauthWXJsp">
+			<result name="success">WEB-INF/jsp/oauth/oauthWX.jsp</result>
+		</action>
+	</package>
+
+</struts>

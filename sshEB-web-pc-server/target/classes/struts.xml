@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 取消 struts2 动态方法调用 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<!-- 是否启用开发模式 -->
+	<constant name="struts.devMode" value="false" />
+	<!-- 所有匹配 *.action 的请求都由 struts2 处理 -->
+	<constant name="struts.action.extension" value="action" />
+	<!-- struts 配置文件改动后，是否重新加载 -->
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<!-- 设置浏览器是否缓存静态内容 -->
+	<constant name="struts.serve.static.browserCache" value="false" />
+	<!-- 自动重新加载映射加载 -->
+	<constant name="struts.convention.classes.reload" value="true" />
+	<!-- action 对象是由Spring负责创建 -->
+	<constant name="struts.objectFactory" value="spring" />
+	<!-- 上传大小 -->
+	<constant name="struts.multipart.maxSize" value="157286400" />
+	
+	<!-- package提供了将多个Action组织为一个模块的方式
+        package的名字必须是唯一的 package可以扩展 当一个package扩展自
+        	另一个package时该package会在本身配置的基础上加入扩展的package
+        	的配置 父package必须在子package前配置 
+        name：package名称
+        extends:继承的父package名称
+        abstract:设置package的属性为抽象的 抽象的package不能定义action 值true:false
+        namespace:定义package命名空间 该命名空间影响到url的地址，
+        	例如此命名空间为 /test 那么访问是的地址为 http://localhost:8080/项目名/test/XX.action
+     -->
+     
+     <include file="/struts/struts-public.xml"></include>
+     <include file="/struts/struts-login.xml"></include>
+
+</struts>

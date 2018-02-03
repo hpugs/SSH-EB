@@ -1,0 +1,182 @@
+.account-bg{
+	width: 100%;
+	background-image: url(../../img/user/bg.png);
+	background-size: cover;
+	position: relative;
+}
+.logo{
+	width: 147px;
+	height: 30px;
+	background-image: url(../../img/logo.png);
+	display: inline-block;
+	position: absolute;
+	top: 50px;
+	left: 50%;
+	margin-left: -73.5px;
+	cursor: pointer;
+}
+.account-input{
+	width: 282px;
+	height: 430px;
+	padding: 0 29px;
+	background-color: var(--white, #fff);
+	border-radius: 5px;
+	display: inline-block;
+	position: absolute;
+	top: 150px;
+	left: 50%;
+	margin-left: -170px;
+}
+.account-input li{
+	width: 100%;
+	font-size: 14px;
+	color: var(--nice, #999);
+	text-align: center;
+	margin-bottom: 20px;
+	float: left;
+}
+.account-input h1{
+	height: 22px;
+	line-height: 22px;
+	font-size: 22px;
+	color: var(--blank, #323232);
+	margin-top: 20px;
+	margin-bottom: 16px;
+}
+.account-input input{
+	width: 240px;
+	height: 20px;
+	line-height: 20px;
+	padding: 9px 20px;
+	font-size: 14px;
+	color: var(--nice, #999);
+	outline: none;
+	border: 1px solid #eff0f4;
+	border-radius: 18px;
+	background-color: #eff0f4;
+}
+.account-input #sms-code input, .account-input #image-code input{
+	width: 144px;
+	float: left;
+}
+.account-input #get-sms-code, .account-input #get-image-code{
+	width: 90px;
+	height: 34px;
+	line-height: 34px;
+	font-size: 12px;
+	color: var(--blank, #323232);
+	border: 1px solid #ccc;
+	border-radius: 17px;
+	display: inline-block;
+	float: right;
+	cursor: pointer;
+} 
+.account-input #get-image-code img{
+	width: 86px;
+	height: 30px;
+	border-radius: 15px;
+	margin-top: 2px;
+}
+.account-input #get-sms-code.not-null{
+	color: var(--nine, #999);
+}
+.account-input input.not-null{
+	color: var(--blank, #323232);
+}
+.account-input input:focus{
+	background-color: var(--white, #fff);
+	color: var(--blank, #323232);
+	box-shadow: 0 5px 16px 6px rgba(0,29,112,0.2);
+	-moz-box-shadow: 0 5px 16px 6px rgba(0,29,112,0.2);
+	transition: All 0.4s ease-in-out;
+    -webkit-transition: All 0.2s ease-in-out;
+    -moz-transition: All 0.2s ease-in-out;
+    -o-transition: All 0.2s ease-in-out;
+}
+.account-input span{
+	height: 14px;
+	line-height: 14px;
+}
+.account-input .account-mobile{
+	float: left;
+	cursor: pointer;	
+}
+.account-input .forgot{
+	float: right;
+	cursor: pointer;
+}
+.account-input .agreement{
+	margin-top: -5px;
+	margin-bottom: 10px;
+}
+.account-input .agreement span{
+	height: 12px;
+	color: var(--blank, #323232);
+	cursor: pointer;
+}
+.account-input .account-mobile:hover, .account-input .forgot:hover{
+	color: #aeaeae;
+}
+.account-input .login, .account-input .register{
+	width: 100%;
+	height: 42px;
+	line-height: 42px;
+	font-size: 16px;
+	color: var(--white, #fff);
+	background-color: var(--fb471d, #fb471d);
+	border-radius: 21px;
+	display: inline-block;
+	cursor: pointer;
+}
+.account-input .login:hover, .account-input .register:hover{
+	background-color: #ff603b;
+}
+.account-input li.go-register, .account-input .go-login, .account-input li.thirdParty{
+	height: 14px;
+	line-height: 14px;
+}
+.account-input .go-login span{
+	color: var(--blank, #323232);
+	cursor: pointer;
+}
+.account-input .go-register span{
+	cursor: pointer;
+}
+.account-input .go-register span:hover{
+	color: #aeaeae;
+}
+.account-input li:nth-last-child(2) i{
+	width: 90px;
+	height: 1px;
+	margin-top: 6.5px;
+	background-color: var(--nine, #999);
+	display: inline-block;
+	float: left;
+}
+.account-input li:nth-last-child(2) i:last-child{
+	float: right;
+}
+.account-input li:last-child i{
+	width: 20px;
+	height: 20px;
+	background-image: url(../../img/user/qq.png);
+	display: inline-block;
+	cursor: pointer;
+}
+.account-input li:last-child i:hover{
+	background-image: url(../../img/user/qq_.png);
+}
+.account-input li:last-child i:first-child{
+	margin-right: 20px;
+	background-image: url(../../img/user/wx.png);
+}
+.account-input li:last-child i:first-child:hover{
+	background-image: url(../../img/user/wx_.png);
+}
+.account-input li:last-child i:last-child{
+	margin-left: 20px;
+	background-image: url(../../img/user/sina.png);
+}
+.account-input li:last-child i:last-child:hover{
+	background-image: url(../../img/user/sina_.png);
+}
