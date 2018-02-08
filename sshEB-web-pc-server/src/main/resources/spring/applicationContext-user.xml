@@ -7,8 +7,20 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
-	<!-- loginAction begin -->
-	<bean id="loginAction" class="com.hpugs.action.LoginAction" scope="prototype"></bean>
-	<!-- loginAction end -->
+	<!-- userAction begin -->
+	<bean id="userAction" class="com.hpugs.action.UserAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+	</bean>
+	<!-- userAction end -->
+	
+	<!-- userService begin -->
+	<bean id="userService" class="com.hpugs.service.impl.UserServiceImpl">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+	<!-- userService begin -->
+	
+	<!-- userDao begin -->
+	<bean id="userDao" class="com.hpugs.dao.impl.UserDaoImpl" parent="baseDao"></bean>
+	<!-- userDao begin -->
 	   
 </beans>

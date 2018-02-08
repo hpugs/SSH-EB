@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>登录_小破孩工作室</title>
+    <title>注册_小破孩工作室</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
@@ -30,15 +30,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="account-bg background-style">
 		<span class="logo background-style" onclick='javascipt:document.location.href="public/indexJsp.action"'></span>
 		<ul class="account-input">
-			<li><h1>登录</h1></li>
-			<li id="account"><input type="text" maxlength="50" placeholder="账号/手机号/邮箱" /></li>
-			<li id="sms-code" style="display: none;"><input type="text" maxlength="6" placeholder="请输入验证码" /><span id="get-sms-code">获取验证码</span></li>
-			<li id="passwd"><input type="password" maxlength="20" placeholder="请输入密码" /></li>
-			<li><span class="account-mobile">手机验证码登录</span><span class="forgot">忘记密码</span></li>
-			<li><span class="login">登录</span></li>
-			<li class="go-register login-show">还没有账号？&nbsp;&nbsp;<span>请注册</span></li>
-			<li class="thirdParty login-show"><i></i><span>其他登录方式</span><i></i></li>
-			<li class="login-show"><i class="wx background-style"></i><i class="qq background-style"></i><i class="sina background-style"></i></li>
+			<li><h1>注册</h1></li>
+			<li id="account"><input type="text" maxlength="11" placeholder="请输入手机号" /></li>
+			<li id="sms-code"><input type="text" maxlength="6" placeholder="请输入短信验证码" /><span id="get-sms-code">获取验证码</span></li>
+			<li id="image-code"><input type="text" maxlength="4" placeholder="请输入图片验证码" /><span id="get-image-code"><img src="public/getImageCode.action" alt="点击换一张"></span></li>
+			<li id="passwd"><input type="password" maxlength="20" placeholder="请设置登录密码" /></li>
+			<li class="agreement">注册默认同意<span>《小破孩工作室注册协议》</span></li>
+			<li class="button"><span class="register">注册</span></li>
+			<li class="go-login">已有账号？&nbsp;&nbsp;<span>去登录</span></li>
 		</ul>
 	</div>
   </body>

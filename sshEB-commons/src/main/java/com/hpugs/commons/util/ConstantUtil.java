@@ -150,6 +150,7 @@ public class ConstantUtil {
 	public static final String PC_FORGET_CODE_TYPE = "pcForgetCode";// PC找回密码短信验证码标示
 	public static final String PC_UPDATE_CODE_TYPE = "pcUpdateCode";// PC修改密码短信验证码标示
 	public static final String PC_THIRD_BINDING_CODE_TYPE = "pcThirdBindingCode";// PC第三方账号绑定短信验证码标示
+	public static final String PC_REGISTER_IMG_CODE_TYPE = "pcRegisterImgCode";// PC注册图片验证码标示
 	public static final int SMS_CODE_LENGTH = 6;// 生成短信验证码的位数
 	public static final int IMG_CODE_LENGTH = 4;// 生成图片验证码的位数
 	public static final int PASSWORD_LENGTH = 6;// 生成密码的位数

@@ -9,7 +9,7 @@
 		<!-- 未登录、操作错误 -->
 		<global-results>
 			<result name="notLogin" type="redirectAction">
-				<param name="namespace">/login</param>
+				<param name="namespace">/user</param>
                 <param name="actionName">loginJsp.action</param>
 			</result>
 			<result name="error">error.jsp</result>
@@ -20,6 +20,12 @@
 		<action name="indexJsp" class="publicAction" method="indexJsp">
 			<result name="success">/WEB-INF/jsp/index.jsp</result>
 		</action>
+		
+		<!-- 获取短信验证码接口 -->
+		<action name="sendSmsCode" class="publicAction" method="sendSmsCode"></action>
+		
+		<!-- 获取图片验证码接口 -->
+		<action name="getImageCode" class="publicAction" method="getImageCode"></action>
 	</package>
 
 </struts>

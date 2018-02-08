@@ -33,6 +33,7 @@
      -->
      
      <include file="/struts/struts-public.xml"></include>
-     <include file="/struts/struts-login.xml"></include>
+     <include file="/struts/struts-user.xml"></include>
+     <include file="/struts/struts-agreement.xml"></include>
 
 </struts>

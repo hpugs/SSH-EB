@@ -44,7 +44,7 @@ function init(){
 	});
 	//更新图片验证码
 	$("#get-image-code").click(function(){
-		$(this).children("img").attr("src", "getImageCode.action?t="+new Date().getTime());
+		$(this).children("img").attr("src", "public/getImageCode.action?t="+new Date().getTime());
 	});
 	//登录
 	$(".login").click(function(){
@@ -93,7 +93,7 @@ function init(){
   			shadeClose: true, // 是否点击遮罩关闭
   			zIndex: 19930912, //层叠顺序
 			title: "《艺鲸版库注册协议》",
-			content: 'agreement_registerJsp.action'
+			content: 'agreement/registerJsp.action'
 		});
 	});
 	//注册
@@ -101,12 +101,12 @@ function init(){
 		userRegister();
 	});
 	//去注册
-	$(".go-register").click(function(){
-		document.location.href = "user_registerJsp.action";
+	$(".go-register span").click(function(){
+		document.location.href = "user/registerJsp.action";
 	});
 	//去登录
-	$(".go-login").click(function(){
-		document.location.href = "user_loginJsp.action";
+	$(".go-login span").click(function(){
+		document.location.href = "user/loginJsp.action";
 	});
 }
 //账号登录
@@ -116,7 +116,7 @@ function checkAccountLogin(){
 			if(netLoading){
 				netLoading = false;
 				$.ajax({
-			        url: "user_checkAccount.action",
+			        url: "user/checkAccount.action",
 			        type: "post",
 			        data: {"account": $("#account input").val(), "passwd": $("#passwd input").val()},
 			        dataType: "json",
@@ -156,7 +156,7 @@ function checkMobileLogin(){
 					if(netLoading){
 						netLoading = false;
 						$.ajax({
-					        url: "user_checkMobile.action",
+					        url: "user/checkMobile.action",
 					        type: "post",
 					        data: {"account": $("#account input").val(), "smsCode": $("#sms-code input").val()},
 					        dataType: "json",
@@ -204,7 +204,7 @@ function forgotPasswd(){
 							if(netLoading){
 								netLoading = false;
 								$.ajax({
-							        url: "user_forgetPasswd.action",
+							        url: "user/forgetPasswd.action",
 							        type: "post",
 							        data: {"account": $("#account input").val(), "passwd": $("#passwd input").val(), "smsCode": $("#sms-code input").val()},
 							        dataType: "json",
@@ -254,7 +254,7 @@ function userRegister(){
 								if(netLoading){
 									netLoading = false;
 									$.ajax({
-								        url: "user_registerAccount.action",
+								        url: "user/registerAccount.action",
 								        type: "post",
 								        data: {"account": $("#account input").val(), "passwd": $("#passwd input").val(), "smsCode": $("#sms-code input").val(), "imageCode": $("#image-code input").val()},
 								        dataType: "json",
@@ -302,7 +302,7 @@ function getSmsCode(codType){
 			if(netLoading){
 				netLoading = false
 				$.ajax({
-			        url: "sendSmsCode.action",
+			        url: "public/sendSmsCode.action",
 			        type: "post",
 			        data: {"mobile": $("#account input").val(), "codeType": codType},
 			        dataType: "json",

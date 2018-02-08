@@ -7,8 +7,8 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
-	<!-- loginAction begin -->
-	<bean id="loginAction" class="com.hpugs.action.LoginAction" scope="prototype"></bean>
-	<!-- loginAction end -->
+	<!-- agreementAction begin -->
+	<bean id="agreementAction" class="com.hpugs.action.AgreementAction" scope="prototype"></bean>
+	<!-- agreementAction end -->
 	   
 </beans>

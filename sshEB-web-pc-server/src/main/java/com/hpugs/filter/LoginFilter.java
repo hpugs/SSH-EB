@@ -36,9 +36,16 @@ public class LoginFilter implements Filter{
 	public void init(FilterConfig arg0) throws ServletException {
 		// TODO Auto-generated method stub
 		actionPaths.add("public/indexJsp.action");//首页页面
-		actionPaths.add("login/loginJsp.action");//登录页面
-		actionPaths.add("login/loginCheck.action");//账号密码登录接口
-		actionPaths.add("login/smsCodeLoginCheck.action");//短信验证码登录接口
+		actionPaths.add("public/sendSmsCode.action");//发送短信验证码
+		actionPaths.add("public/getImageCode.action");//得到图片验证码
+		
+		actionPaths.add("user/loginJsp.action");//登录页面
+		actionPaths.add("user/registerJsp.action");//注册页面
+		actionPaths.add("user/checkAccount.action");//账号密码登录接口
+		actionPaths.add("user/checkMobile.action");//手机号短信验证码登录接口
+		actionPaths.add("user/registerAccount.action");//注册接口
+		
+		actionPaths.add("agreement/registerJsp.action");//注册协议页面
 	}
 	
 	/**
