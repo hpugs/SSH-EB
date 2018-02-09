@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.hpugs.entity.po.LogUserLogin" table="log_user_login">
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="native" />
+		</id>
+		<property name="ip" type="java.lang.String">
+			<column name="ip" />
+		</property>
+		<property name="sessionId" type="java.lang.String">
+			<column name="session_id" />
+		</property>
+		<property name="accountType" type="java.lang.Integer">
+			<column name="account_type" />
+		</property>
+		<property name="loginAccount" type="java.lang.String">
+			<column name="login_account" />
+		</property>
+		<property name="loginTime" type="java.util.Date">
+			<column name="login_time" />
+		</property>
+		<property name="loginResult" type="java.lang.String">
+			<column name="login_result" />
+		</property>
+		<property name="loginState" type="java.lang.Integer">
+			<column name="login_state" />
+		</property>
+		<property name="source" type="java.lang.Integer">
+			<column name="source" />
+		</property>
+		<property name="state" type="java.lang.Integer">
+			<column name="state" />
+		</property>
+		<property name="updateUserId" type="java.lang.Integer">
+			<column name="update_user_id" />
+		</property>
+		<property name="gmtCreate" type="java.util.Date">
+			<column name="gmt_create" />
+		</property>
+		<property name="gmtModified" type="java.util.Date">
+			<column name="gmt_modified" />
+		</property>
+		<property name="remark" type="java.lang.String">
+			<column name="remark" />
+		</property>
+	</class>
+</hibernate-mapping>

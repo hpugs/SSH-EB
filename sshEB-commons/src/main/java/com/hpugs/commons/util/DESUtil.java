@@ -11,7 +11,7 @@ import javax.crypto.spec.IvParameterSpec;
 
 public class DESUtil {
 	
-	private static final String key = MD5("YIJINGBANKU123456!@#$%").substring(0, 8).toUpperCase();
+	private static final String key = MD5("HPUgs123456!@#$%").substring(0, 8).toUpperCase();
     
     /**
      * 加密逻辑方法

@@ -23,7 +23,7 @@
 		<resource>
 			<directory>src/main/java</directory>
 			<includes>
-				<include>com/hpugs/po/*.hbm.xml</include>
+				<include>com/hpugs/entity/po/*.hbm.xml</include>
 			</includes>
 		</resource>
 	</resources>

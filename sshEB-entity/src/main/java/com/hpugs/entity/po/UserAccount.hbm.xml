@@ -10,8 +10,14 @@
 		<property name="account" type="java.lang.String">
 			<column name="account" />
 		</property>
+		<property name="mobile" type="java.lang.String">
+			<column name="mobile" />
+		</property>
 		<property name="passwd" type="java.lang.String">
 			<column name="passwd" />
+		</property>
+		<property name="avatar" type="java.lang.String">
+			<column name="avatar" />
 		</property>
 		<property name="state" type="java.lang.Integer">
 			<column name="state" />

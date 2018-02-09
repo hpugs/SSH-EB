@@ -14,7 +14,9 @@ public class UserAccount extends BaseEntity {
 	
 	private Integer id;      //账号Id
 	private String account;  //账号
+	private String mobile;   //手机号
 	private String passwd;   //密码
+	private String avatar;   //用户头像
 	private Integer state;   //状态（1、正常（默认）；2、删除、3、冻结）
 	private Date gmtCreate;  //创建时间
 	private Date gmtModified;//修改时间
@@ -36,12 +38,28 @@ public class UserAccount extends BaseEntity {
 		this.account = account;
 	}
 
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
 	public String getPasswd() {
 		return passwd;
 	}
 
 	public void setPasswd(String passwd) {
 		this.passwd = passwd;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 	public Integer getState() {
@@ -78,8 +96,9 @@ public class UserAccount extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "UserAccount [id=" + id + ", account=" + account + ", passwd=" + passwd + ", state=" + state
-				+ ", gmtCreate=" + gmtCreate + ", gmtModified=" + gmtModified + ", remark=" + remark + "]";
+		return "UserAccount [id=" + id + ", account=" + account + ", mobile=" + mobile + ", passwd=" + passwd
+				+ ", avatar=" + avatar + ", state=" + state + ", gmtCreate=" + gmtCreate + ", gmtModified="
+				+ gmtModified + ", remark=" + remark + "]";
 	}
 
 }

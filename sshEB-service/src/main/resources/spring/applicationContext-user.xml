@@ -7,10 +7,15 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
-	<!-- userAction begin -->
-	<bean id="userAction" class="com.hpugs.action.UserAction" scope="prototype">
-		<property name="userService" ref="userService"></property>
+	<!-- userService begin -->
+	<bean id="userService" class="com.hpugs.service.impl.UserServiceImpl">
+		<property name="userAccountDao" ref="userAccountDao"></property>
+		<property name="logUserLoginDao" ref="logUserLoginDao"></property>
 	</bean>
-	<!-- userAction end -->
+	<!-- userService begin -->
 	
+	<!-- userDao begin -->
+	<bean id="userAccountDao" class="com.hpugs.dao.impl.UserAccountDaoImpl" parent="baseDao"></bean>
+	<!-- userDao begin -->
+	   
 </beans>

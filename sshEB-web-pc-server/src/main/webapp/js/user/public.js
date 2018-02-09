@@ -120,7 +120,10 @@ function checkAccountLogin(){
 			        type: "post",
 			        data: {"account": $("#account input").val(), "passwd": $("#passwd input").val()},
 			        dataType: "json",
-			        async: false,
+			        async: true,
+			        beforeSend: function() {
+			        	showLoading(false);
+					},
 			        success: function (jsonData) {
 			            if("1" == jsonData.status){
 			            	var url = jsonData.source;
@@ -135,6 +138,7 @@ function checkAccountLogin(){
 			        },
 			        complete: function () {
 			            netLoading = true;
+			            closeLoading();
 			        }
 			    });
 			}else{

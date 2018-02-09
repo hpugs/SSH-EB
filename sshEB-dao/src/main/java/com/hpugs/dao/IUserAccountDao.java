@@ -9,6 +9,6 @@ import com.hpugs.entity.po.UserAccount;
  * @version 1.0
  * @date 创建时间：2018年2月8日 上午9:47:41
  */
-public interface IUserDao extends IBaseDao<UserAccount>{
+public interface IUserAccountDao extends IBaseDao<UserAccount>{
 
 }

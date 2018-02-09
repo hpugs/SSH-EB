@@ -22,6 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="css/user/account.css" />
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js" ></script>
 	<script type="text/javascript" src="layer/layer.js"></script>
+	<script type="text/javascript" src="js/public.js"></script>
 	<script type="text/javascript" src="js/validate.js"></script>
 	<script type="text/javascript" src="js/user/public.js"></script>
   </head>

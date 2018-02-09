@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.hpugs.entity.po.LogSmsSend" table="log_sms_send">
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="native" />
+		</id>
+		<property name="ip" type="java.lang.String">
+			<column name="ip" />
+		</property>
+		<property name="phone" type="java.lang.String">
+			<column name="phone" />
+		</property>
+		<property name="content" type="java.lang.String">
+			<column name="content" />
+		</property>
+		<property name="type" type="java.lang.Integer">
+			<column name="type" />
+		</property>
+		<property name="autograph" type="java.lang.String">
+			<column name="autograph" />
+		</property>
+		<property name="template" type="java.lang.String">
+			<column name="template" />
+		</property>
+		<property name="responseCode" type="java.lang.String">
+			<column name="response_code" />
+		</property>
+		<property name="responseMsg" type="java.lang.String">
+			<column name="response_msg" />
+		</property>
+		<property name="requestId" type="java.lang.String">
+			<column name="request_id" />
+		</property>
+		<property name="bizId" type="java.lang.String">
+			<column name="biz_id" />
+		</property>
+		<property name="responseSubTime" type="java.util.Date">
+			<column name="response_sub_time" />
+		</property>
+		<property name="source" type="java.lang.Integer">
+			<column name="source" />
+		</property>
+		<property name="enabled" type="java.lang.Integer">
+			<column name="enabled" />
+		</property>
+		<property name="gmtCreate" type="java.util.Date">
+			<column name="gmt_create" />
+		</property>
+		<property name="remark" type="java.lang.String">
+			<column name="remark" />
+		</property>
+	</class>
+</hibernate-mapping>
