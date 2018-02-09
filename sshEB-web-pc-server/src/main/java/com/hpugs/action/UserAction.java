@@ -20,8 +20,8 @@ public class UserAction extends BaseAction {
 	
 	private IUserService userService;
 	
-	//姓名、账号、密码、短信验证码、图片验证码、访问子页面地址、头像地址、性别、邮箱
-	private String name, account, passwd, smsCode, imageCode, itemPath, headImage, gender, email;
+	//账号、密码、短信验证码、图片验证码、访问子页面地址
+	private String account, passwd, smsCode, imageCode, itemPath;
 	
 	/**
 	 * @Description 登录页面
@@ -86,6 +86,7 @@ public class UserAction extends BaseAction {
 		Map<String, String> requestMap = new HashMap<String, String>();
 		requestMap.put("account", account);
 		requestMap.put("smsCode", smsCode);
+		requestMap.put("smsCodeType", ConstantUtil.PC_LOGIN_CODE_TYPE);
 		Map<String, Object> resultMap = userService.loginMobile(requestMap);
 		if(ConstantUtil.RESULT_STATUS_SUCCESS_STR.equals(resultMap.get(ConstantUtil.RESULT_STATUS_KEY)) && null != resultMap.get(ConstantUtil.RESULT_DATA_KEY)){
 			setUserInfoInSession((int)resultMap.get(ConstantUtil.RESULT_DATA_KEY));
@@ -105,13 +106,16 @@ public class UserAction extends BaseAction {
 		//返会操作结果对象
 		Map<String, Object> resultMap = Utils.createResultMap();
 		if(null != imageCode){
-			String oldImageCode = (String) session.getAttribute(ConstantUtil.PC_REGISTER_CODE_TYPE);
+			String oldImageCode = (String) session.getAttribute(ConstantUtil.PC_REGISTER_IMG_CODE_TYPE);
 			if(null != oldImageCode){
 				if(imageCode.equalsIgnoreCase(DESUtil.decrypt(oldImageCode))){
+					//清除图片验证码
+					session.removeAttribute(ConstantUtil.PC_REGISTER_IMG_CODE_TYPE);
 					Map<String, String> requestMap = new HashMap<String, String>();
 					requestMap.put("account", account);
 					requestMap.put("passwd", passwd);
 					requestMap.put("smsCode", smsCode);
+					requestMap.put("smsCodeType", ConstantUtil.PC_REGISTER_CODE_TYPE);
 					resultMap = userService.saveUser(requestMap);
 				}else{
 					resultMap.put(ConstantUtil.RESULT_MSG_KEY, "图片验证码输入错误");
@@ -171,10 +175,6 @@ public class UserAction extends BaseAction {
 		this.userService = userService;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public void setAccount(String account) {
 		this.account = account;
 	}
@@ -199,16 +199,4 @@ public class UserAction extends BaseAction {
 		this.itemPath = itemPath;
 	}
 
-	public void setHeadImage(String headImage) {
-		this.headImage = headImage;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
 }

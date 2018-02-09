@@ -89,7 +89,7 @@ public class ConstantUtil {
 	public static final String accessKeyId_SMS = "xxxxxxxxxxxxxxxx";// 你的accessKeyId,参考本文档步骤2
 	public static final String accessKeySecret_SMS = "xxxxxxxxxxxxxxxx";// 你的accessKeySecret，参考本文档步骤2
 	// 短信签名
-	public static final String SmsFreeSignName = "hpugs";
+	public static final String SmsFreeSignName = "艺鲸";
 	//短信常量
 	public static final String MESSAGE_TEMPLATE = "SMS_95675001";// 短信通知模板ID:尊敬的${userName}，您的新密码为：${password}，请妥善保管。如非本人操作，请即时变更
 	public static final String MESSAGE_CODE = "SMS_95670001";// 短信验证码模板ID:您的验证码是：${code}，该验证码5分钟内有效，请勿随意告知他人。

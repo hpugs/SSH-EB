@@ -44,6 +44,7 @@ public class LoginFilter implements Filter{
 		actionPaths.add("user/checkAccount.action");//账号密码登录接口
 		actionPaths.add("user/checkMobile.action");//手机号短信验证码登录接口
 		actionPaths.add("user/registerAccount.action");//注册接口
+		actionPaths.add("user/forgetPasswd.action");//修改密码接口
 		
 		actionPaths.add("agreement/registerJsp.action");//注册协议页面
 	}
@@ -58,7 +59,7 @@ public class LoginFilter implements Filter{
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 		String path = httpServletRequest.getServletPath();
 		path = path.indexOf("/") == 0 ? path.substring(1) : path;
-		Map<String, Object> staffInfo = (Map<String, Object>) httpServletRequest.getSession().getAttribute("staffInfo");
+		Map<String, Object> staffInfo = (Map<String, Object>) httpServletRequest.getSession().getAttribute("userInfo");
 		if(staffInfo == null && !actionPaths.contains(path)){
 			if(0 < path.indexOf("Jsp")){//页面请求
 				request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);

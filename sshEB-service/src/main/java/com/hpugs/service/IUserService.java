@@ -2,6 +2,8 @@ package com.hpugs.service;
 
 import java.util.Map;
 
+import com.hpugs.entity.po.UserAccount;
+
 /**
  * @Description 用户模块
  * @author 高尚
@@ -64,6 +66,17 @@ public interface IUserService {
 	 * @date 创建时间：2018年2月8日 上午10:05:30
 	 */
 	Map<String, Object> getUserInfo(Integer userId);
+
+	/**
+	 * @Description 根据用户Id得到账号对象
+	 * @param string
+	 * @return
+	 *
+	 * @author 高尚
+	 * @version 1.0
+	 * @date 创建时间：2018年2月9日 下午3:06:54
+	 */
+	UserAccount getUserAccountById(String id);
 
 	
 }

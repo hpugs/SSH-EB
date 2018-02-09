@@ -130,7 +130,7 @@ function checkAccountLogin(){
 			            	if(null != url){
 			            		document.location.href = url;
 			            	}else{
-			            		document.location.href = "indexJsp.action";
+			            		document.location.href = "public/indexJsp.action";
 			            	}
 			            }else{
 			            	 myAlert(jsonData.msg, 5);
@@ -164,14 +164,17 @@ function checkMobileLogin(){
 					        type: "post",
 					        data: {"account": $("#account input").val(), "smsCode": $("#sms-code input").val()},
 					        dataType: "json",
-					        async: false,
+					        async: true,
+					        beforeSend: function() {
+					        	showLoading(false);
+							},
 					        success: function (jsonData) {
 					            if("1" == jsonData.status){
 					            	var url = jsonData.source;
 					            	if(null != url){
 					            		document.location.href = url;
 					            	}else{
-					            		document.location.href = "indexJsp.action";
+					            		document.location.href = "public/indexJsp.action";
 					            	}
 					            }else{
 					            	myAlert(jsonData.msg, 5);
@@ -179,6 +182,7 @@ function checkMobileLogin(){
 					        },
 					        complete: function () {
 					            netLoading = true;
+					            closeLoading();
 					        }
 					    });
 					}else{
@@ -212,7 +216,10 @@ function forgotPasswd(){
 							        type: "post",
 							        data: {"account": $("#account input").val(), "passwd": $("#passwd input").val(), "smsCode": $("#sms-code input").val()},
 							        dataType: "json",
-							        async: false,
+							        async: true,
+							        beforeSend: function() {
+							        	showLoading(false);
+									},
 							        success: function (jsonData) {
 							            if("1" == jsonData.status){
 							            	switchLogin($(".account-mobile"));
@@ -222,6 +229,7 @@ function forgotPasswd(){
 							        },
 							        complete: function () {
 							            netLoading = true;
+							            closeLoading();
 							        }
 							    });
 							}else{
@@ -262,16 +270,20 @@ function userRegister(){
 								        type: "post",
 								        data: {"account": $("#account input").val(), "passwd": $("#passwd input").val(), "smsCode": $("#sms-code input").val(), "imageCode": $("#image-code input").val()},
 								        dataType: "json",
-								        async: false,
+								        async: true,
+								        beforeSend: function() {
+								        	showLoading(false);
+										},
 								        success: function (jsonData) {
 								            if("1" == jsonData.status){
-								            	document.location.href = "user_loginJsp.action";
+								            	document.location.href = "user/loginJsp.action";
 								            }else{
 								            	myAlert(jsonData.msg, 5);
 								            }
 								        },
 								        complete: function () {
 								            netLoading = true;
+								            closeLoading();
 								        }
 								    });
 								}else{
@@ -310,7 +322,10 @@ function getSmsCode(codType){
 			        type: "post",
 			        data: {"mobile": $("#account input").val(), "codeType": codType},
 			        dataType: "json",
-			        async: false,
+			        async: true,
+			        beforeSend: function() {
+			        	showLoading(false);
+					},
 			        success: function (jsonData) {
 			            if("1" == jsonData.status){
 			            	myAlert(jsonData.msg, 6);
@@ -321,6 +336,7 @@ function getSmsCode(codType){
 			        },
 			        complete: function () {
 			            netLoading = true;
+			            closeLoading();
 			        }
 			    });
 			}else{

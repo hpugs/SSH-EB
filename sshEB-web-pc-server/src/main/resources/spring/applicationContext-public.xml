@@ -8,7 +8,10 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- publicAction begin -->
-	<bean id="publicAction" class="com.hpugs.action.PublicAction" scope="prototype"></bean>
+	<bean id="publicAction" class="com.hpugs.action.PublicAction" scope="prototype">
+		<property name="publicService" ref="publicService"></property>
+		<property name="userService" ref="userService"></property>
+	</bean>
 	<!-- publicAction end -->
 	   
 </beans>

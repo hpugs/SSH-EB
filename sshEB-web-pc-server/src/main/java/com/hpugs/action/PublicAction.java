@@ -10,6 +10,7 @@ import com.hpugs.commons.util.DESUtil;
 import com.hpugs.commons.util.Utils;
 import com.hpugs.commons.util.VerifyCodeUtil;
 import com.hpugs.service.IPublicService;
+import com.hpugs.service.IUserService;
 
 /**
  * @Description 公共Action
@@ -20,6 +21,7 @@ import com.hpugs.service.IPublicService;
 public class PublicAction extends BaseAction {
 	
 	private IPublicService publicService;
+	private IUserService userService;
 	
 	//手机号、验证码类型
 	private String mobile, codeType;
@@ -44,13 +46,27 @@ public class PublicAction extends BaseAction {
 	 * @date 创建时间：2017年12月25日 下午3:14:01
 	 */
 	public void sendSmsCode(){
-		Map<String, String> requestMap = new HashMap<String, String>();
-		requestMap.put("mobile", mobile);
-		requestMap.put("codeType", codeType);
-		requestMap.put("source", "1");//来源（1：PC（默认）；2：H5；3、Android；4、IOS；5、ERP）
-		requestMap.put("requestIp", Utils.getRequestIp(request));
-		Map<String, Object> resultMap = publicService.sendSmsCode(requestMap);
-		
+		//返会操作结果对象
+		Map<String, Object> resultMap = Utils.createResultMap();
+		//判断是否为修改密码
+		if(ConstantUtil.PC_UPDATE_CODE_TYPE.equals(codeType)){
+			Map<String, Object> userInfo = (Map<String, Object>) session.getAttribute("userInfo");
+			if(null == userInfo){
+				resultMap.put(ConstantUtil.RESULT_STATUS_KEY, ConstantUtil.RESULT_STATUS_NOTLOGIN_STR);
+				resultMap.put(ConstantUtil.RESULT_MSG_KEY, ConstantUtil.RESULT_MSG_NOTLOGIN);
+				writeJsonFromObject(resultMap);
+				return;
+			}
+			mobile = userService.getUserAccountById(userInfo.get("userId").toString()).getMobile();
+		}
+		Map<String, String> requestParams = new HashMap<String, String>();
+		requestParams.put("mobile", mobile);//手机号
+		requestParams.put("smsCodeType", codeType);//短信验证码类型
+		requestParams.put("source", "1");//来源（1：PC（默认）；2：H5；3、Android；4、IOS；5、ERP）
+		requestParams.put("requestIp", Utils.getRequestIp(request));//ip地址
+		requestParams.put("aliSmsCodeType", "1");//短信验证码
+		requestParams.put("aliMessageCode", ConstantUtil.MESSAGE_CODE);//短信验证码签名
+		resultMap = publicService.sendSmsCode(requestParams);
 		writeJsonFromObject(resultMap);
 	}
 	
@@ -70,6 +86,18 @@ public class PublicAction extends BaseAction {
 
 	public void setPublicService(IPublicService publicService) {
 		this.publicService = publicService;
+	}
+
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public void setCodeType(String codeType) {
+		this.codeType = codeType;
 	}
 
 }

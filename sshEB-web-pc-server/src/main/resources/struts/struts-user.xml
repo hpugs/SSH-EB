@@ -32,6 +32,8 @@
 		<action name="checkMobile" class="userAction" method="checkMobile"></action>
 		<!-- 注册接口 -->
 		<action name="registerAccount" class="userAction" method="registerAccount"></action>
+		<!-- 修改密码接口 -->
+		<action name="forgetPasswd" class="userAction" method="forgetPasswd"></action>
 	</package>
 
 </struts>
