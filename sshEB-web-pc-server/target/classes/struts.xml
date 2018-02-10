@@ -34,6 +34,7 @@
      
      <include file="/struts/struts-public.xml"></include>
      <include file="/struts/struts-user.xml"></include>
+     <include file="/struts/struts-oauth.xml"></include>
      <include file="/struts/struts-agreement.xml"></include>
 
 </struts>

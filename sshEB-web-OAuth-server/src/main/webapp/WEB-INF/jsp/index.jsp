@@ -23,6 +23,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    Hello Word! <br>
+    小破孩第三方登录授权统一地址 <br>
   </body>
 </html>

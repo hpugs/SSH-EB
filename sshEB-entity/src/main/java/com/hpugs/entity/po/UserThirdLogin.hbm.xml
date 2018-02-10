@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.hpugs.entity.po.UserThirdLogin" table="user_third_login">
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="native" />
+		</id>
+		<property name="userAccountId" type="java.lang.Integer">
+			<column name="user_account_id" />
+		</property>
+		<property name="type" type="java.lang.Integer">
+			<column name="type" />
+		</property>
+		<property name="openId" type="java.lang.String">
+			<column name="open_id" />
+		</property>
+		<property name="msg" type="java.lang.String">
+			<column name="msg" />
+		</property>
+		<property name="avatar" type="java.lang.String">
+			<column name="avatar" />
+		</property>
+		<property name="nickName" type="java.lang.String">
+			<column name="nick_name" />
+		</property>
+		<property name="gender" type="java.lang.String">
+			<column name="gender" />
+		</property>
+		<property name="country" type="java.lang.String">
+			<column name="country" />
+		</property>
+		<property name="province" type="java.lang.String">
+			<column name="province" />
+		</property>
+		<property name="city" type="java.lang.String">
+			<column name="city" />
+		</property>
+		<property name="gmtCreate" type="java.util.Date">
+			<column name="gmt_create" />
+		</property>
+		<property name="gmtModified" type="java.util.Date">
+			<column name="gmt_modified" />
+		</property>
+		<property name="remark" type="java.lang.String">
+			<column name="remark" />
+		</property>
+	</class>
+</hibernate-mapping>

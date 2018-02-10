@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-02-09 12:50:24
+Date: 2018-02-10 17:52:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,7 +37,7 @@ CREATE TABLE `log_sms_send` (
   `gmt_create` datetime NOT NULL COMMENT '创建时间',
   `remark` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for log_user_login
@@ -59,7 +59,7 @@ CREATE TABLE `log_user_login` (
   `gmt_modified` datetime DEFAULT NULL COMMENT '修改时间',
   `remark` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for user_account
@@ -69,11 +69,33 @@ CREATE TABLE `user_account` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户Id',
   `account` varchar(20) DEFAULT NULL COMMENT '用户账号',
   `mobile` varchar(11) DEFAULT NULL COMMENT '手机号',
-  `passwd` varchar(20) DEFAULT NULL COMMENT '用户密码',
+  `passwd` varchar(100) DEFAULT NULL COMMENT '用户密码',
   `avatar` varchar(255) DEFAULT NULL COMMENT '用户头像',
   `state` tinyint(4) unsigned DEFAULT '1' COMMENT '账户状态（1、正常（默认）；2、删除、3、冻结）',
   `gmt_create` datetime DEFAULT NULL COMMENT '创建时间',
   `gmt_modified` datetime DEFAULT NULL COMMENT '修改时间',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for user_third_login
+-- ----------------------------
+DROP TABLE IF EXISTS `user_third_login`;
+CREATE TABLE `user_third_login` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '第三方登录表id',
+  `user_account_id` int(11) unsigned DEFAULT NULL COMMENT '用户表id',
+  `type` tinyint(4) unsigned DEFAULT NULL COMMENT '类型(1/2/3) 1:QQ 2:微信 3:新浪',
+  `open_id` varchar(255) DEFAULT NULL COMMENT '授权用户唯一标识',
+  `msg` varchar(255) DEFAULT NULL COMMENT '返回信息',
+  `avatar` varchar(255) DEFAULT NULL COMMENT '第三方头像',
+  `nick_name` varchar(255) DEFAULT NULL COMMENT '第三方昵称',
+  `gender` varchar(4) DEFAULT NULL COMMENT '性别',
+  `country` varchar(255) DEFAULT NULL COMMENT '国家',
+  `province` varchar(255) DEFAULT NULL COMMENT '省份',
+  `city` varchar(255) DEFAULT NULL COMMENT '城市',
+  `gmt_create` datetime DEFAULT NULL COMMENT '创建时间',
+  `gmt_modified` datetime DEFAULT NULL COMMENT '记录最后一次修改时间',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

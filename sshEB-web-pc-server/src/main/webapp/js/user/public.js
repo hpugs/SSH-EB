@@ -36,6 +36,8 @@ function init(){
 	$("#get-sms-code").click(function(){
 		if("注册" == $("h1").html()){
 			getSmsCode("pcRegisterCode");
+		}else if("账号绑定" == $("h1").html()){
+			getSmsCode("pcThirdBindingCode");
 		}else if($(".forgot").css("display") == "none"){
 			getSmsCode("pcForgetCode");
 		}else{
@@ -66,7 +68,11 @@ function init(){
 	    var theEvent = e || window.event;    
 	    var code = theEvent.keyCode || theEvent.which || theEvent.charCode;    
 	    if (code == 13) {
-	    	if(null == $(".register").html()){
+	    	if("注册" == $("h1").html()){
+	    		userRegister();
+	    	} if("账号绑定" == $("h1").html()){
+	    		userBinding();
+	    	}else{
 	    		//判断是否为找回密码
 	    		if($(".forgot").css("display") == "none"){
 	    			forgotPasswd();
@@ -78,9 +84,6 @@ function init(){
 	    				checkAccountLogin();
 	    			}
 	    		}
-	    	}else{
-	    		//回车事件注册
-	    		userRegister();
 	    	}
         }
    	};
@@ -99,6 +102,10 @@ function init(){
 	//注册
 	$(".register").click(function(){
 		userRegister();
+	});
+	//账号绑定
+	$(".binding").click(function(){
+		userBinding();
 	});
 	//去注册
 	$(".go-register span").click(function(){
@@ -277,6 +284,63 @@ function userRegister(){
 								        success: function (jsonData) {
 								            if("1" == jsonData.status){
 								            	document.location.href = "user/loginJsp.action";
+								            }else{
+								            	myAlert(jsonData.msg, 5);
+								            }
+								        },
+								        complete: function () {
+								            netLoading = true;
+								            closeLoading();
+								        }
+								    });
+								}else{
+									myAlert("正在操作...", 4);	
+								}
+							}else{
+								myAlert("为了您的账号安全，请设置6~20位以数字、字母、符号至少两种，且以字母开头的密码", 2);
+							}
+						}else{
+							myAlert("密码不能为空", 2);
+						}
+					}else{
+						myAlert("图片验证码不能为空", 2);
+					}
+				}else{
+					myAlert("短信验证码非法", 2);
+				}
+			}else{
+				myAlert("短信验证码不能为空", 2);
+			}
+		}else{
+			myAlert("手机号非法", 2);
+		}
+	}else{
+		myAlert("手机号不能为空", 2);
+	}
+}
+//账号绑定
+function userBinding(){
+	if(0 < $("#account input").val().length){
+		if(checkMobile($("#account input").val())){
+			if(0 < $("#sms-code input").val().length){
+				if(checkInteger($("#sms-code input").val())){
+					if(0 < $("#image-code input").val().length){
+						if(0 < $("#passwd input").val().length){
+							if(checkPassword($("#passwd input").val())){
+								if(netLoading){
+									netLoading = false;
+									$.ajax({
+								        url: "oauth/thirdBinding.action",
+								        type: "post",
+								        data: {"mobile": $("#account input").val(), "passwd": $("#passwd input").val(), "smsCode": $("#sms-code input").val(), "imageCode": $("#image-code input").val()},
+								        dataType: "json",
+								        async: true,
+								        beforeSend: function() {
+								        	showLoading(false);
+										},
+								        success: function (jsonData) {
+								            if("1" == jsonData.status){
+								            	document.location.href = "public/indexJsp.action";
 								            }else{
 								            	myAlert(jsonData.msg, 5);
 								            }

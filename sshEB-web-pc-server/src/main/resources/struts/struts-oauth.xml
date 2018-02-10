@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	<package name="oauth" namespace="/oauth" extends="struts-default">
+		<!-- 未登录、操作错误 -->
+		<global-results>
+			<result name="notLogin" type="redirectAction">
+				<param name="namespace">/user</param>
+                <param name="actionName">loginJsp.action</param>
+			</result>
+			<result name="error">error.jsp</result>
+		</global-results>
+		<!-- 未登录、操作错误 -->
+	
+		<!-- 微信授权登录页面 -->
+		<action name="wxLoginJsp" class="oauthAction" method="wxLoginJsp">
+			<result name="success">${wxLoginJsp}</result>
+		</action>
+		
+		<!-- 微信登录授权回调接口 -->
+		<action name="wxLoginResult" class="oauthAction" method="wxLoginResult">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/oauth</param>
+                <param name="actionName">thirdLoginJsp</param>
+				<param name="thirdType">${thirdType}</param>
+				<param name="thirdOpenId">${thirdOpenId}</param>
+				<param name="thirdAvatar">${thirdAvatar}</param>
+				<param name="thirdNickName">${thirdNickName}</param>
+				<param name="thirdGender">${thirdGender}</param>
+				<param name="thirdCountry">${thirdCountry}</param>
+				<param name="thirdProvince">${thirdProvince}</param>
+				<param name="thirdCity">${thirdCity}</param>
+			</result>
+		</action>
+		
+		<!-- qq登录授权回调接口 -->
+		<action name="qqLoginResult" class="oauthAction" method="qqLoginResult">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/oauth</param>
+                <param name="actionName">thirdLoginJsp</param>
+				<param name="thirdType">${thirdType}</param>
+				<param name="thirdOpenId">${thirdOpenId}</param>
+				<param name="thirdAvatar">${thirdAvatar}</param>
+				<param name="thirdNickName">${thirdNickName}</param>
+				<param name="thirdGender">${thirdGender}</param>
+			</result>
+		</action>
+		
+		<!-- 第三方登录页面 -->
+		<action name="thirdLoginJsp" class="oauthAction" method="thirdLogin">
+			<result name="notBindingPhone" type="redirectAction">
+				<param name="namespace">/oauth</param>
+	               <param name="actionName">thirdBindingJsp</param>
+			</result>
+			<result name="okBindingPhone" type="redirectAction">
+				<param name="namespace">/public</param>
+	               <param name="actionName">indexJsp</param>
+			</result>
+		</action>
+		
+		<!-- 第三方账号绑定手机号页面 -->
+		<action name="thirdBindingJsp" class="oauthAction" method="thirdBindingJsp">
+			<result name="success">/WEB-INF/jsp/mobileBinding.jsp</result>
+		</action>
+		
+		<!-- 第三方账号绑定手机号接口 -->
+		<action name="thirdBinding" class="oauthAction" method="thirdBinding"></action>
+		
+	</package>
+	
+</struts>

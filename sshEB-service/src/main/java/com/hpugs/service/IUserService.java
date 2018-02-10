@@ -78,5 +78,16 @@ public interface IUserService {
 	 */
 	UserAccount getUserAccountById(String id);
 
+	/**
+	 * @Description 第三方登录手机号绑定
+	 * @param requestParams
+	 * @return
+	 *
+	 * @author 高尚
+	 * @version 1.0
+	 * @date 创建时间：2018年2月10日 下午3:58:09
+	 */
+	Map<String, Object> saveThirdAccount(Map<String, String> requestParams);
+
 	
 }

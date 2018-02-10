@@ -11,9 +11,11 @@ import com.hpugs.commons.util.SmsCodeManager;
 import com.hpugs.commons.util.Utils;
 import com.hpugs.dao.ILogUserLoginDao;
 import com.hpugs.dao.IUserAccountDao;
+import com.hpugs.dao.IUserThirdLoginDao;
 import com.hpugs.email.tencent.SendEmailUtil;
 import com.hpugs.entity.po.LogUserLogin;
 import com.hpugs.entity.po.UserAccount;
+import com.hpugs.entity.po.UserThirdLogin;
 import com.hpugs.service.IUserService;
 
 /**
@@ -26,6 +28,7 @@ public class UserServiceImpl implements IUserService {
 	
 	private IUserAccountDao userAccountDao;
 	private ILogUserLoginDao logUserLoginDao;
+	private IUserThirdLoginDao userThirdLoginDao;
 
 	@Override
 	public Map<String, Object> loginAccount(Map<String, String> requestMap) {
@@ -161,10 +164,10 @@ public class UserServiceImpl implements IUserService {
 								resultMap.put(ConstantUtil.RESULT_MSG_KEY, "短信验证码已超时，请重新获取");
 							}
 					}else{
-						resultMap.put(ConstantUtil.RESULT_MSG_KEY, "请输入正确的短信验证码");
+						resultMap.put(ConstantUtil.RESULT_MSG_KEY, "请重新获取短信验证码");
 					}
 				}else{
-					resultMap.put(ConstantUtil.RESULT_MSG_KEY, "请重新获取验证码");
+					resultMap.put(ConstantUtil.RESULT_MSG_KEY, "请获取验证码");
 				}
 			}else{
 				resultMap.put(ConstantUtil.RESULT_MSG_KEY, "验证码非法");
@@ -227,7 +230,7 @@ public class UserServiceImpl implements IUserService {
 								}
 								if(ConstantUtil.MAX_ERROR_SMS_CODE_DATE >= outTime){//短信验证码是否有效
 									if(account.equals(codes[0]) && smsCode.equals(codes[2])){//防止获取到验证码后，修改手机号
-										//查询登录信息
+										//查询账号信息
 										String hql = "WHERE account='" + account + "' OR mobile = '" + account + "' ";
 										List<UserAccount> listUserAccount = userAccountDao.findObjects(hql);
 										if(!Utils.collectionIsNotEmpty(listUserAccount)){
@@ -259,10 +262,10 @@ public class UserServiceImpl implements IUserService {
 									resultMap.put(ConstantUtil.RESULT_MSG_KEY, "短信验证码已超时，请重新获取");
 								}
 						}else{
-							resultMap.put(ConstantUtil.RESULT_MSG_KEY, "请输入正确的短信验证码");
+							resultMap.put(ConstantUtil.RESULT_MSG_KEY, "请重新获取短信验证码");
 						}
 					}else{
-						resultMap.put(ConstantUtil.RESULT_MSG_KEY, "请重新获取验证码");
+						resultMap.put(ConstantUtil.RESULT_MSG_KEY, "请获取验证码");
 					}
 				}else{
 					resultMap.put(ConstantUtil.RESULT_MSG_KEY, "验证码格式非法");
@@ -341,10 +344,10 @@ public class UserServiceImpl implements IUserService {
 									resultMap.put(ConstantUtil.RESULT_MSG_KEY, "短信验证码已超时，请重新获取");
 								}
 						}else{
-							resultMap.put(ConstantUtil.RESULT_MSG_KEY, "请输入正确的短信验证码");
+							resultMap.put(ConstantUtil.RESULT_MSG_KEY, "请重新获取短信验证码");
 						}
 					}else{
-						resultMap.put(ConstantUtil.RESULT_MSG_KEY, "请重新获取验证码");
+						resultMap.put(ConstantUtil.RESULT_MSG_KEY, "请获取短信验证码");
 					}
 				}else{
 					resultMap.put(ConstantUtil.RESULT_MSG_KEY, "验证码格式非法");
@@ -388,6 +391,94 @@ public class UserServiceImpl implements IUserService {
 	}
 	
 	@Override
+	public Map<String, Object> saveThirdAccount(Map<String, String> requestParams) {
+		//返会操作结果对象
+		Map<String, Object> resultMap = Utils.createResultMap();
+		
+		//获取传入参数
+		String mobile = requestParams.get("mobile");
+		String passwd = requestParams.get("passwd");
+		String smsCode = requestParams.get("smsCode");
+		String smsCodeType = requestParams.get("smsCodeType");
+		String thirdType = requestParams.get("thirdType");
+		String thirdOpenId = requestParams.get("thirdOpenId");
+		
+		if(null != mobile && 11 == mobile.length()){
+			if(null != passwd && 6 <= passwd.length() && 20 >= passwd.length()){
+				if(Utils.stringIsNotEmpty(smsCode) && ConstantUtil.SMS_CODE_LENGTH == smsCode.length()) {
+					 Map<String, String> smsCodeMap = SmsCodeManager.getSmsCodeMapById(mobile);
+					 if(null != smsCodeMap){
+						String smsCodeRedis = smsCodeMap.get(smsCodeType);
+						if(Utils.stringIsNotEmpty(smsCodeRedis)){
+							String [] codes = DESUtil.decrypt(smsCodeRedis).split(":");
+							long outTime = 0;
+							try{
+								outTime = (new Date().getTime() - ConstantUtil.SMS_CODE_DATE_SDF.parse(codes[3]).getTime()) / 1000 / 60;
+							}catch (Exception e) {
+								SendEmailUtil.send("重置密码", "1、引起错误字段："+codes[3]+"；2、错误详情："+e.toString());
+							}
+							if(ConstantUtil.MAX_ERROR_SMS_CODE_DATE >= outTime){//短信验证码是否有效
+								if(mobile.equals(codes[0]) && smsCode.equals(codes[2])){//防止获取到验证码后，修改手机号
+									if(Utils.stringIsNotEmpty(thirdType) && Utils.stringIsNotEmpty(thirdOpenId)){
+										UserThirdLogin userThirdLogin = userThirdLoginDao.get("WHERE type = '" + thirdType + "' AND openId = '" + thirdOpenId + "' ");
+										if(null != userThirdLogin){
+											//查询账号信息
+											String hql = "WHERE account='" + mobile + "' OR mobile = '" + mobile + "' ";
+											List<UserAccount> listUserAccount = userAccountDao.findObjects(hql);
+											if(!Utils.collectionIsNotEmpty(listUserAccount)){
+												UserAccount userAccount = new UserAccount();
+												userAccount.setAccount(mobile);//账号
+												userAccount.setMobile(mobile);//手机号
+												userAccount.setPasswd(DESUtil.encrypt(passwd));//密码
+												userAccount.setState(1);
+												userAccount.setGmtCreate(new Date());//创建时间
+												userAccount = userAccountDao.saveObject(userAccount);
+												if(null != userAccount && null != userAccount.getId()){
+													//移除注册验证码
+													smsCodeMap.remove(smsCodeType);
+													SmsCodeManager.saveSmsCode(mobile, smsCodeMap);
+													
+													//更新返回data参数
+													resultMap.put(ConstantUtil.RESULT_STATUS_KEY, ConstantUtil.RESULT_STATUS_SUCCESS_STR);
+													resultMap.put(ConstantUtil.RESULT_MSG_KEY, ConstantUtil.RESULT_MSG_SUCCESS);
+												}else{
+													resultMap.put(ConstantUtil.RESULT_MSG_KEY, "账号绑定失败");
+												}
+											}else{
+												SendEmailUtil.send("账户绑定", "1、手机号关联多个账号；2、手机号："+mobile);
+												resultMap.put(ConstantUtil.RESULT_MSG_KEY, "账户绑定异常，请联系客服");
+											}
+										}else{
+											resultMap.put(ConstantUtil.RESULT_MSG_KEY, "绑定信息不存在，请联系客服");
+										}
+									}else{
+										resultMap.put(ConstantUtil.RESULT_MSG_KEY, "缺少必要绑定信息");
+									}
+								}else{
+									resultMap.put(ConstantUtil.RESULT_MSG_KEY, "请输入正确的短信验证码");
+								}
+							}else{
+								resultMap.put(ConstantUtil.RESULT_MSG_KEY, "验证码已失效，请重新获取");
+							}
+						}else{
+							resultMap.put(ConstantUtil.RESULT_MSG_KEY, "请重新获取短信验证码");
+						}
+					 }else{
+						 resultMap.put(ConstantUtil.RESULT_MSG_KEY, "请获取短信验证码");
+					 }
+				}else{
+					resultMap.put(ConstantUtil.RESULT_MSG_KEY, "验证码输入非法");
+				}
+			}else{
+				resultMap.put(ConstantUtil.RESULT_MSG_KEY, "请输入合法的密码");
+			}
+		}else{
+			resultMap.put(ConstantUtil.RESULT_MSG_KEY, "请输入合法的手机号");
+		}
+		return resultMap;
+	}
+	
+	@Override
 	public UserAccount getUserAccountById(String id) {
 		return userAccountDao.getObjectById(id);
 	}
@@ -398,6 +489,10 @@ public class UserServiceImpl implements IUserService {
 
 	public void setLogUserLoginDao(ILogUserLoginDao logUserLoginDao) {
 		this.logUserLoginDao = logUserLoginDao;
+	}
+
+	public void setUserThirdLoginDao(IUserThirdLoginDao userThirdLoginDao) {
+		this.userThirdLoginDao = userThirdLoginDao;
 	}
 
 }

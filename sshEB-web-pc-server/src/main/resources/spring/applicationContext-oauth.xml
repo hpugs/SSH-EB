@@ -7,16 +7,11 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
-	<!-- userService begin -->
-	<bean id="userService" class="com.hpugs.service.impl.UserServiceImpl">
-		<property name="userAccountDao" ref="userAccountDao"></property>
-		<property name="logUserLoginDao" ref="logUserLoginDao"></property>
-		<property name="userThirdLoginDao" ref="userThirdLoginDao"></property>
+	<!-- oauthAction begin -->
+	<bean id="oauthAction" class="com.hpugs.action.LoginOAuthAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+		<property name="userThirdLoginService" ref="userThirdLoginService"></property>
 	</bean>
-	<!-- userService begin -->
-	
-	<!-- userDao begin -->
-	<bean id="userAccountDao" class="com.hpugs.dao.impl.UserAccountDaoImpl" parent="baseDao"></bean>
-	<!-- userDao begin -->
+	<!-- oauthAction end -->
 	   
 </beans>

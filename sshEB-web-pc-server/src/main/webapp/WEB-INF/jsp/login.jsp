@@ -5,7 +5,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 
 <!DOCTYPE HTML>
-<html>
+<html xmlns:wb="http://open.weibo.com/wb">
   <head>
     <base href="<%=basePath%>">
     
@@ -25,6 +25,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="js/public.js"></script>
 	<script type="text/javascript" src="js/validate.js"></script>
 	<script type="text/javascript" src="js/user/public.js"></script>
+	<!-- 第三方登录 -->
+	<script type="text/javascript" src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=2096941538" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-callback="true" charset="utf-8"></script>
+	<script type="text/javascript" src="js/loginAuth.js"></script>
   </head>
   
   <body>
@@ -39,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li><span class="login">登录</span></li>
 			<li class="go-register login-show">还没有账号？&nbsp;&nbsp;<span>请注册</span></li>
 			<li class="thirdParty login-show"><i></i><span>其他登录方式</span><i></i></li>
-			<li class="login-show"><i class="wx background-style"></i><i class="qq background-style"></i><i class="sina background-style"></i></li>
+			<li class="login-show"><i id="wx_btn" class="background-style"></i><i id="qq_btn" class="background-style"></i><i id="sina_btn" class="background-style"></i></li>
 		</ul>
 	</div>
   </body>

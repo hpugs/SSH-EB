@@ -46,6 +46,13 @@ public class LoginFilter implements Filter{
 		actionPaths.add("user/registerAccount.action");//注册接口
 		actionPaths.add("user/forgetPasswd.action");//修改密码接口
 		
+		actionPaths.add("oauth/wxLoginJsp.action");//微信授权登录页面
+		actionPaths.add("oauth/wxLoginResult.action");//微信登录授权回调接口
+		actionPaths.add("oauth/qqLoginResult.action");//qq登录授权回调接口
+		actionPaths.add("oauth/thirdLoginJsp.action");//第三方登录页面
+		actionPaths.add("oauth/thirdBindingJsp.action");//第三方账号绑定手机号页面 
+		actionPaths.add("oauth/thirdBinding.action");//第三方账号绑定手机号接口
+		
 		actionPaths.add("agreement/registerJsp.action");//注册协议页面
 	}
 	
